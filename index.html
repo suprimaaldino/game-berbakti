@@ -6,23 +6,21 @@
     <meta name="theme-color" content="#667eea" />
     <title>🎮 Misi Membantu Orang Tua</title>
 
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/game-berbakti/manifest.json">
+    <link rel="apple-touch-icon" href="/game-berbakti/assets/icons/icon-192.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="/game-berbakti/assets/css/style.css" />
 
     <!-- Font & Ikon -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <!-- Gaya Internal -->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-        }
-        .coin-icon {
-            font-size: 3rem;
         }
         .alert-toast {
             position: fixed;
@@ -38,27 +36,17 @@
             gap: 10px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1000;
-            animation: slideDown 0.5s ease-out;
             opacity: 0;
             pointer-events: none;
+            transition: opacity 0.3s ease;
         }
         .alert-toast.show {
             opacity: 1;
+            pointer-events: auto;
         }
         @keyframes slideDown {
             0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        .install-button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 20px auto;
-            display: block;
         }
     </style>
 </head>
@@ -69,13 +57,8 @@
             <p>Selesaikan misi harian untuk dapatkan koin dan hadiah!</p>
         </header>
 
-        <!-- Tombol Install PWA -->
-        <button id="installBtn" style="display:none;" class="install-button">
-            📲 Install Aplikasi
-        </button>
-
         <section class="coins-display" aria-label="Total Koin">
-            <img src="assets/icons/coin.gif" alt="Koin" class="coin-icon">
+            <img src="/game-berbakti/assets/icons/coin.gif" alt="Koin" class="coin-icon">
             <div class="coin-count" id="coinCount">0</div>
         </section>
 
@@ -109,18 +92,39 @@
                 🖨️ Cetak Misi Harian
             </button>
         </section>
+
+        <!-- Tombol Install PWA -->
+        <section class="install-section" style="text-align: center; margin: 20px 0;">
+            <button id="installBtn" style="
+                background: #388e3c;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                font-weight: 600;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                display: none;
+            ">
+                📲 Install Aplikasi
+            </button>
+            <p style="color: #777; font-size: 0.9rem; margin-top: 8px;">
+                Pasang aplikasi ini di HP-mu seperti aplikasi biasa!
+            </p>
+        </section>
     </div>
 
     <!-- Toast Notifikasi -->
     <div id="toast" class="alert-toast">
-        <i class="fas fa-check-circle" style="color: #4caf50;"></i>
+        <i class="fas fa-bullhorn" style="color: #4a90e2;"></i>
         <span id="toastMessage">Berhasil!</span>
     </div>
 
     <!-- Suara -->
-    <audio id="coinSound" src="assets/sounds/tukar.mp3" preload="auto"></audio>
+    <audio id="coinSound" src="/game-berbakti/assets/sounds/tukar.mp3" preload="auto"></audio>
 
     <!-- Script -->
-    <script src="assets/js/script.js"></script>
+    <script src="/game-berbakti/assets/js/script.js"></script>
 </body>
 </html>
