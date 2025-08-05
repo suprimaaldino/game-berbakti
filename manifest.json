@@ -1,0 +1,27 @@
+{
+  "name": "Misi Membantu Orang Tua",
+  "short_name": "Misi Anak",
+  "description": "Aplikasi misi harian untuk anak membantu orang tua dan dapat hadiah.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "lang": "id-ID",
+  "dir": "ltr"
+}

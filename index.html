@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#667eea" />
+    <title>🎮 Misi Membantu Orang Tua</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Font & Ikon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .coin-icon {
+            font-size: 3rem;
+        }
+        .alert-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .alert-toast.show {
+            opacity: 1;
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+
+    <!-- PWA Install Prompt -->
+    <script>
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎮 Misi Membantu Orang Tua</h1>
+            <p>Selesaikan misi harian untuk dapatkan koin dan hadiah!</p>
+        </header>
+
+        <section class="coins-display" aria-label="Total Koin">
+            <img src="assets/icons/coin.gif" alt="Koin" class="coin-icon">
+            <div class="coin-count" id="coinCount">0</div>
+        </section>
+
+        <section class="missions">
+            <h2 class="section-title">📋 Misi Harian</h2>
+            <div class="mission-list" id="missionList">
+                <!-- Misi akan dimuat oleh script.js -->
+            </div>
+        </section>
+
+        <section class="rewards">
+            <h2 class="section-title">🎁 Hadiah Spesial</h2>
+            <div class="reward-list" id="rewardList">
+                <!-- Hadiah akan dimuat oleh script.js -->
+            </div>
+        </section>
+
+        <!-- Tombol Cetak -->
+        <section class="print-section" style="text-align: center; margin: 30px 0;">
+            <button onclick="printDailyMissions()" style="
+                background: #4a90e2;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                font-weight: 600;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            ">
+                🖨️ Cetak Misi Harian
+            </button>
+        </section>
+    </div>
+
+    <!-- Toast Notifikasi -->
+    <div id="toast" class="alert-toast">
+        <i class="fas fa-check-circle" style="color: #4caf50;"></i>
+        <span id="toastMessage">Berhasil!</span>
+    </div>
+
+    <!-- Suara -->
+    <audio id="coinSound" src="assets/sounds/tukar.mp3" preload="auto"></audio>
+
+    <!-- Script -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
