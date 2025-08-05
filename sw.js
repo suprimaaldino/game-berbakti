@@ -12,12 +12,11 @@ const urlsToCache = [
   '/game-berbakti/assets/sounds/tukar.mp3'
 ];
 
+// Eksternal (tidak wajib di-cache saat install)
 const externalResources = [
   'https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
 ];
-
-const allUrls = [...urlsToCache, ...externalResources];
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -45,7 +44,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const requestUrl = new URL(event.request.url);
 
-  // Navigasi HTML: prioritas jaringan, fallback ke cache
+  // HTML: prioritas jaringan, fallback ke cache
   if (event.request.mode === 'navigate' || event.request.destination === 'document') {
     event.respondWith(
       fetch(event.request).catch(() => caches.match('/game-berbakti/index.html'))
@@ -64,7 +63,7 @@ self.addEventListener('fetch', event => {
           }
 
           // Cache dinamis hanya untuk aset lokal
-          if (requestUrl.origin === location.origin &&
+          if (requestUrl.origin === self.location.origin &&
               urlsToCache.some(url => url.endsWith(requestUrl.pathname))) {
             const responseToCache = response.clone();
             caches.open(CACHE_NAME).then(cache => {

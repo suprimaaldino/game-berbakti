@@ -5,31 +5,45 @@ var gameState = {
     redeemedRewards: new Set()
 };
 
+// Variabel untuk PWA Install Prompt
 var deferredPrompt;
 var installBtn = document.getElementById('installBtn');
 
-// Tangkap event sebelum install
+// Tangkap event sebelum install (hanya berjalan di mobile + Chrome)
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (installBtn) installBtn.style.display = 'inline-block';
+    // Tampilkan tombol install hanya jika di perangkat mobile
+    if (installBtn) {
+        installBtn.style.display = 'inline-block';
+    }
 });
 
-// Klik tombol install
+// Tambahkan event listener ke tombol install (jika ada)
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
+        if (!deferredPrompt) {
+            showNotification('📱 Aplikasi sudah terpasang atau tidak bisa diinstall.');
+            return;
+        }
+
+        // Tampilkan prompt install
         deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        if (choice.outcome === 'accepted') {
-            showNotification('📱 Aplikasi berhasil di-install!');
+
+        // Tunggu respons pengguna
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === 'accepted') {
+            showNotification('🎉 Selamat! Aplikasi berhasil diinstall!');
         } else {
             showNotification('❌ Install dibatalkan.');
         }
+
+        // Reset prompt
         deferredPrompt = null;
         installBtn.style.display = 'none';
     });
 }
+
 // Daftar misi
 var missions = [
     { id: 1, title: "Bersihkan Kamar", description: "Rapikan tempat tidur dan bersihkan lantai kamar", reward: 5 },
@@ -78,6 +92,7 @@ var toastMessageEl = document.getElementById('toastMessage');
 
 // Fungsi: Tampilkan notifikasi toast
 function showNotification(message) {
+    if (!toastEl) return;
     toastMessageEl.textContent = message;
     toastEl.classList.add('show');
     setTimeout(() => {
@@ -123,6 +138,7 @@ function loadState() {
 
 // Fungsi: Mainkan suara koin
 function playCoinSound() {
+    if (!coinSound) return;
     coinSound.currentTime = 0;
     coinSound.play().catch(e => console.log("Gagal memainkan suara:", e));
 }

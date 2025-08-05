@@ -2,7 +2,7 @@
   "name": "Misi Membantu Orang Tua",
   "short_name": "Misi Anak",
   "description": "Aplikasi misi harian untuk anak membantu orang tua dan dapat hadiah.",
-  "start_url": "/game-berbakti/index.html",
+  "start_url": "/game-berbakti/",
   "scope": "/game-berbakti/",
   "display": "standalone",
   "background_color": "#667eea",
