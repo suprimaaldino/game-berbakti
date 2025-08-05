@@ -270,3 +270,14 @@ button:focus {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.install-button {
+  background: #4facfe;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0;
+}

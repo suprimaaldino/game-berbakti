@@ -49,16 +49,18 @@
             0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             100% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+        .install-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+        }
     </style>
-
-    <!-- PWA Install Prompt -->
-    <script>
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -66,6 +68,11 @@
             <h1>🎮 Misi Membantu Orang Tua</h1>
             <p>Selesaikan misi harian untuk dapatkan koin dan hadiah!</p>
         </header>
+
+        <!-- Tombol Install PWA -->
+        <button id="installBtn" style="display:none;" class="install-button">
+            📲 Install Aplikasi
+        </button>
 
         <section class="coins-display" aria-label="Total Koin">
             <img src="assets/icons/coin.gif" alt="Koin" class="coin-icon">

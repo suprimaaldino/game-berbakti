@@ -5,6 +5,31 @@ var gameState = {
     redeemedRewards: new Set()
 };
 
+var deferredPrompt;
+var installBtn = document.getElementById('installBtn');
+
+// Tangkap event sebelum install
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'inline-block';
+});
+
+// Klik tombol install
+if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+            showNotification('📱 Aplikasi berhasil di-install!');
+        } else {
+            showNotification('❌ Install dibatalkan.');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+    });
+}
 // Daftar misi
 var missions = [
     { id: 1, title: "Bersihkan Kamar", description: "Rapikan tempat tidur dan bersihkan lantai kamar", reward: 5 },
